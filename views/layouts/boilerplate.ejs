@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!--Bootstrap-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+     
+    <!--Estrellas para el review-->
+    <link rel="stylesheet" href="/stylesheets/stars.css">
+
+    <!--CSS globlal-->
+    <link rel="stylesheet" href="/stylesheets/app.css">
+
+    <title>YelpCamp</title>
+</head>
+
+<body class="d-flex flex-column vh-100">
+    <!--Partial que tiene el codigo de mi navbar -->
+    <%-  include('../partials/navbar')%>
+
+
+    <main class="container mt-5">
+        <%- include('../partials/flash') %>
+        <%- body %>
+    </main>
+
+    <%-  include('../partials/footer')%>
+
+        <!-- Scripts originales de bootstrap -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+        crossorigin="anonymous"></script>
+
+    <script src="/javascripts/validateForms.js"></script>
+
+
+
+</body>
+
+</html>
+
+

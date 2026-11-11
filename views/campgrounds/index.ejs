@@ -1,0 +1,61 @@
+<% layout('layouts/boilerplate') %>
+
+<!-- 1. Cargamos el CSS y JS de MapTiler -->
+<script src="https://cdn.maptiler.com/maptiler-sdk-js/v2.3.0/maptiler-sdk.umd.js"></script>
+<link href="https://cdn.maptiler.com/maptiler-sdk-js/v2.3.0/maptiler-sdk.css" rel="stylesheet" />
+
+<!-- 2. El div para el mapa gigante (limitado por app.css) -->
+<div id="cluster-map"></div>
+
+<h1 class="mt-3">All Campgrounds</h1>
+<div class="mb-3">
+    <a href="/campgrounds/new">Add Campground</a>
+</div>
+
+<% for (let campground of campgrounds) { %>
+    <div class="card mb-3">
+        <div class="row">
+            <div class="col-md-4">
+
+                <% if (campground.images.length) { %>
+                    <!-- Agregamos h-100 y object-fit-cover para rellenar la tarjeta perfecto -->
+                    <img class="img-fluid h-100 object-fit-cover" alt="Imagen del campamento" src="<%= campground.images[0].url %>">
+                <% } else { %>
+                    <!-- Escudo: Si no subieron foto, mostramos una tuya por defecto -->
+                    <img class="img-fluid h-100 object-fit-cover" alt="Por defecto"
+                        src="https://res.cloudinary.com/gokgtyni/image/upload/v1793366459/YelpCamp/czn2cdy9c9nm9moee8mp.jpg">
+                <% } %>
+
+            </div>
+            <div class="col-md-8">
+                <div class="card-body">
+                    <h5 class="card-title">
+                        <%= campground.title %>
+                    </h5>
+                    <p class="card-text">
+                        <%= campground.description %>
+                    </p>
+                    <p class="card-text">
+                        <small class="text-muted">
+                            <%= campground.location %>
+                        </small>
+                    </p>
+                    <a class="btn btn-primary" href="/campgrounds/<%= campground._id %>">
+                        Ver <%= campground.title %>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+<% } %>
+
+<script>
+    const maptilerApiKey = '<%- process.env.MAPTILER_API_KEY %>';
+    
+    // OJO AQUÍ: MapTiler requiere un formato estricto llamado FeatureCollection.
+    // Al envolver tus campamentos dentro de { features: ... }, cumplimos esa regla.
+    const campgrounds = { features: <%- JSON.stringify(campgrounds) %> };
+</script>
+
+<!-- 4. Llamamos al script del Cluster Map -->
+<script src="/javascripts/clusterMap.js"></script>

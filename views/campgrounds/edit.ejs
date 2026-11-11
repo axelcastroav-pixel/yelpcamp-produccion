@@ -1,0 +1,79 @@
+<% layout('layouts/boilerplate') %>
+
+    <div class="row">
+        <h1 class="text-center">Editar Campamento</h1>
+        <div class="col-md-6 offset-md-3">
+            <!-- Fíjate en el ?_method=PUT al final de la ruta -->
+            <form action="/campgrounds/<%= campground._id %>?_method=PUT" method="POST" novalidate
+                class="validated-form" enctype="multipart/form-data">
+                
+                <div class="mb-3">
+                    <label class="form-label" for="title">Title</label>
+                    <input class="form-control" type="text" id="title" name="campground[title]"
+                        value="<%= campground.title %>" required autofocus>
+                    <div class="valid-feedback">Looks good!</div>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label" for="location">Ubication</label>
+                    <input class="form-control" type="text" id="location" name="campground[location]"
+                        value="<%= campground.location %>" required>
+                    <div class="valid-feedback">Looks good!</div>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label" for="price">Campground Price</label>
+                    <div class="input-group">
+                        <span class="input-group-text" id="price-label">$</span>
+                        <input type="text" class="form-control" id="price" placeholder="0.00" aria-label="price"
+                            aria-describedby="price-label" name="campground[price]" value="<%= campground.price %>"
+                            required>
+                        <div class="valid-feedback">Looks good!</div>
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label" for="description">Description</label>
+                    <!-- Ojo aquí: el textarea no usa el atributo "value", el contenido va en medio de las etiquetas -->
+                    <textarea class="form-control" type="text" id="description" name="campground[description]"
+                        required><%= campground.description %></textarea>
+                    <div class="valid-feedback">Looks good!</div>
+                </div>
+
+                 <div class="mb-3">
+                    <label for="image" class="form-label">Add more image(s)</label>
+                    <input class="form-control" type="file" name="image" id="image" multiple>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Delete Images</label>
+                    <div class="row"> <!-- Creamos la fila principal -->
+                        <% campground.images.forEach(function(img, i) { %>
+                            <!-- Cada imagen toma 3 espacios de la cuadrícula -->
+                            <div class="col-4 col-sm-3 mb-3">
+
+                                <!-- MODIFICACIÓN: Envolvemos la imagen en el label conectado al checkbox -->
+                                <label for="image-<%= i %>" style="cursor: pointer;">
+                                    <img src="<%= img.thumbnail %>" class="img-thumbnail" alt="">
+                                </label>
+
+                                <!-- Ponemos el checkbox en bloque con un pequeño margen arriba (mt-1) -->
+                                <div class="form-check mt-1">
+                                    <input type="checkbox" id="image-<%= i %>" name="deleteImages[]"
+                                        value="<%= img.filename %>">
+                                    <label for="image-<%= i %>">Delete?</label>
+                                </div>
+
+                            </div>
+                            <% }) %>
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <button class="btn btn-info w-100">Actualizar Campamento</button>
+                </div>
+            </form>
+
+            <a href="/campgrounds/<%= campground._id %>">Cancelar y regresar</a>
+        </div>
+    </div>

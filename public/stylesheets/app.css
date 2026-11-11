@@ -1,0 +1,11 @@
+/* Este es el mapa gigante que muestra TODOS los campamentos en index.ejs */
+#cluster-map {
+    width: 100%;
+    height: 500px;
+}
+
+/* Este es el mapa pequeño de un solo campamento en show.ejs */
+#map {
+    width: 100%;
+    height: 300px;
+}
