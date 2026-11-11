@@ -19,16 +19,16 @@
             </ul>
         </div>
 
-        <div class="navbar-nav ms-auto">
-            <% if (!currentUser) { %>
-                //Si no esta logeado muestra esto
-                <a class="nav-link" href="/login">Login</a>
-                <a class="nav-link" href="/register">Register</a>
-                <% } else { %>
-                //Si si esta logeado solo muestra esto
-                <a class="nav-link" href="/logout">Logout</a>
-                <% } %>
-        </div>
+       <div class="navbar-nav ms-auto">
+        <% if (!locals.currentUser) { %>
+            //Si no esta logeado muestra esto
+            <a class="nav-link" href="/login">Login</a>
+            <a class="nav-link" href="/register">Register</a>
+            <% } else { %>
+            //Si si esta logeado solo muestra esto
+            <a class="nav-link" href="/logout">Logout</a>
+            <% } %>
+    </div>
 
 
     </div>
